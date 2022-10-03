@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2019"],
+    "target": "es2020",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./patterns",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "declarationMap": true
+  },
+  "include": ["patterns/**/*", "../index.ts"],
+  "exclude": ["node_modules", "dist"]
+}

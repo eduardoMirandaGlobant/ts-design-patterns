@@ -1,0 +1,12 @@
+# dependencies
+/node_modules
+/dist
+
+# IDEs and editors
+.idea/
+
+.npmrc
+.npm
+
+.scannerwork
+./**/.DS_Store

@@ -1,5 +1,6 @@
 import { Clock } from "./clock";
 import { ClockFactory } from "./clock-factory";
+import { Country } from "./clock.types";
 
 /**
  * Abstract Factory
@@ -14,10 +15,10 @@ import { ClockFactory } from "./clock-factory";
 class Client {
   main() {
     let clock: Clock;
-    clock = ClockFactory.createClock(ClockFactory.ARGENTINA_CLOCK);
+    clock = ClockFactory.createClock(Country.Argentina);
     console.log(`Argentina Time: ${clock.getTime()}`);
 
-    clock = ClockFactory.createClock(ClockFactory.MEXICO_CLOCK);
+    clock = ClockFactory.createClock(Country.Mexico);
     console.log(`Mexico Time: ${clock.getTime()}`);
   }
 }

@@ -1,16 +1,14 @@
 import { ArgentinaClock } from "./argentina-clock";
 import { Clock } from "./clock";
+import { ClockTypes, Country } from "./clock.types";
 import { MexicoClock } from "./mexico-clock";
 
 export class ClockFactory {
-  public static ARGENTINA_CLOCK = 0;
-  public static MEXICO_CLOCK = 1;
+  private constructor() {}
 
-  constructor() {}
-
-  public static createClock(clockType: Number): Clock {
-    if (clockType == this.ARGENTINA_CLOCK) return new ArgentinaClock();
-    if (clockType == this.MEXICO_CLOCK) return new MexicoClock();
+  public static createClock(clockType: ClockTypes): Clock {
+    if (clockType == Country.Argentina) return new ArgentinaClock();
+    if (clockType == Country.Mexico) return new MexicoClock();
     return undefined;
   }
 }

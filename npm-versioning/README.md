@@ -14,6 +14,21 @@ Patch releases: 1.0 or 1.0.x or ~1.0.4
 Minor releases: 1 or 1.x or ^1.0.4
 Major releases: * or x
 
+```
+start with 0.0.0
+
+1° hotfix => 0.0.1
+2° hotfix => 0.0.2
+3° hotfix => 0.0.3
+4° hotfix => 0.0.4
+
+1° release feature => 0.1.0 
+2° release feature => 0.2.0 
+3° release feature => 0.3.0 
+
+AFTER BREAKING CHANGE => 1.0.0 
+```
+
 https://github.com/npm/node-semver#versions
 
 

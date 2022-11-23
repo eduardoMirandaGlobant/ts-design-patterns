@@ -1,0 +1,149 @@
+function identity<T>(value: T): T {
+  return value;
+}
+
+identity(123);
+identity<Number>(123);
+// identity<Number>('a')
+
+function getArrayOfType<T>(items: T[] = []): T[] {
+  return new Array<T>().concat(items);
+}
+
+type User = { id?: string; name: string };
+const numArray = getArrayOfType<Number>();
+const stringArray = getArrayOfType<String>();
+const userArray = getArrayOfType<User>();
+
+numArray.push(1);
+// numArray.push('1')
+stringArray.push("str");
+// stringArray.push(1)
+
+userArray.push({ name: "John" });
+// userArray.push({ id: "1" });
+
+function join<T>(list: T[]): String {
+  return list.filter(Boolean).join(", ");
+}
+
+let num: Number;
+// num = join(["a", "b", undefined, null, 0]);
+let str: String = join(["a", "b", undefined, null, 0]);
+
+/**
+ * Creating Mapped Types with Generics
+ */
+type StringFields<T> = {
+  [K in keyof T]: String;
+};
+
+type Address = {
+  street: String;
+  number: Number;
+  zipCode: Number;
+  city: string;
+};
+
+const address: StringFields<Address> = {
+  street: "street",
+  number: "000",
+  zipCode: "01000",
+  // zipCode: 1000,
+  city: "city",
+};
+
+const user: Readonly<User> = {
+  id: "1",
+  name: "John",
+};
+// Cannot assign to 'id' because it is a read-only property
+// user.id = "2";
+
+type GetReturnType<T> = T extends (...args: any[]) => infer U ? U : never;
+
+function someFunction(a, b) {
+  return parseInt(a + b);
+}
+
+type ReturnTypeOfSomeFunction = GetReturnType<typeof someFunction>;
+const result: number = someFunction(5, 5);
+// const result: string = someFunction(5, 5);
+
+/**
+ * ReturnType
+ */
+type s = ReturnType<typeof someFunction>;
+// const r: s = 'a';
+const r: s = someFunction("1", "2");
+
+/**
+ * Graphs
+ */
+const graph01 = {
+  A: {
+    A: null,
+    B: 20,
+    C: 60,
+    D: 10,
+  },
+  B: {
+    A: 10,
+    B: null,
+    C: 10,
+    D: 30,
+  },
+  C: {
+    A: 10,
+    B: 5,
+    C: null,
+    D: 14,
+  },
+  D: {
+    A: 1,
+    B: 10,
+    C: 40,
+    D: null,
+  },
+};
+
+type Nodes = "A" | "B" | "C" | "D";
+type DirectedGraphNoAutoReferencesWithoutValue<
+  Keys extends string,
+  T,
+  OtherType
+> = {
+  [K in Keys]: {
+    [SameThanK in K]: T;
+  } & { [OtherThanK in Exclude<Keys, K>]: OtherType };
+};
+
+const graph: DirectedGraphNoAutoReferencesWithoutValue<Nodes, null, number> =
+  graph01;
+
+type DirectedGraphNoAutoReferences<Keys extends string, OtherType> = {
+  [K in Keys]: { [OtherThanK in Exclude<Keys, K>]?: OtherType };
+};
+
+const graph02: DirectedGraphNoAutoReferences<Nodes, number> = {
+  A: {
+    B: 10,
+    C: 60,
+    D: 10,
+  },
+  B: {
+    A: 10,
+    C: 10,
+    D: 30,
+  },
+  C: {
+    A: 10,
+    B: 5,
+    D: 14,
+  },
+  D: {
+    A: 1,
+    B: 10,
+    C: 40,
+  },
+};

@@ -14,7 +14,7 @@
     "rootDir": "./patterns",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "declarationMap": true
   },
   "include": ["patterns/**/*", "../index.ts"],

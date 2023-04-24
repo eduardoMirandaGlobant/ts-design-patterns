@@ -40,8 +40,8 @@ if (cluster.isPrimary) {
   }
 
   // Start workers and listen for messages containing notifyRequest
-  const numCPUs = process.env.PROCESSES || cpus().length;
-  for (let i = 0; i < numCPUs; i++) {
+  const numCPUs: any = process.env.PROCESSES || cpus().length;
+  for (let i = 0; i < parseInt(numCPUs); i++) {
     cluster.fork();
   }
 
